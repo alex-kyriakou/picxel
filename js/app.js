@@ -16,17 +16,19 @@ function updateInput(e) {
   searchValue = e.target.value;
 }
 
-async function curatedPhotos() {
-  const dataFetch = await fetch("https://api.pexels.com/v1/curated?per_page=", {
+async function fetchApi(url) {
+  const dataFetch = await fetch(url, {
     method: "GET",
     headers: {
       Accept: "application/json",
       Authorization: auth,
     },
   });
-
   const data = await dataFetch.json();
+  return data;
+}
 
+function generateImages(data) {
   data.photos.forEach((photo) => {
     console.log(data);
     const galleryImg = document.createElement("div");
@@ -39,27 +41,17 @@ async function curatedPhotos() {
   });
 }
 
+async function curatedPhotos() {
+  const data = fetchApi("https://api.pexels.com/v1/curated?per_page=");
+  generateImages(data);
+}
+
 async function searchPhotos(query) {
-  const dataFetch = await fetch(
-    `https://api.pexels.com/v1/search?query=${query}&per_page=`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: auth,
-      },
-    }
+  const data = await fetchApi(
+    `https://api.pexels.com/v1/search?query=${query}&per_page=15`
   );
-  const data = await dataFetch.json();
-  data.photos.forEach((photo) => {
-    const galleryImg = document.createElement("div");
-    galleryImg.classList.add("gallery-img");
-    galleryImg.innerHTML = `
-    <p><a href="${photo.photographer_url}">${photo.photographer}</a></p>
-    <img src=${photo.src.large}> </img>
-    `;
-    gallery.appendChild("galleryImg");
-  });
+
+  generateImages(data);
 }
 
 curatedPhotos();
