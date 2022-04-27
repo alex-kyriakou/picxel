@@ -104,12 +104,12 @@ a:hover {
   border: 1px solid grey;
   border-radius: 0.5rem;
   background-color: rgb(34, 34, 34);
+  transition: 0.2s ease-in-out;
 }
 
 .gallery-img-container:hover {
-  transition: 0.2s ease-in-out;
   background-color: rgba(62, 62, 62, 0.705);
-  box-shadow: rgba(0, 0, 0, 0.789) 0px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.276) 0px 5px 10px;
 }
 
 .nav-btn {
