@@ -135,3 +135,9 @@ a:hover {
   transition: 0.2s ease-in;
   border: 1px solid rgb(1, 152, 1);
 }
+
+@media (max-width: 460px) {
+  .gallery {
+    width: 100%;
+  }
+}
